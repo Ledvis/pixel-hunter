@@ -7,10 +7,29 @@ const SCREEN_IDS = [
   `stats`
 ];
 
+const ARROWS_TEMPLATE = `
+  <div class="arrows__wrap">
+    <style>
+      .arrows__wrap {
+        position: absolute;
+        top: 95px;
+        left: 50%;
+        margin-left: -56px;
+      }
+      .arrows__btn {
+        background: none;
+        border: 2px solid black;
+        padding: 5px 20px;
+      }
+    </style>
+    <button class="arrows__btn  arrows__btn--left"><-</button>
+    <button class="arrows__btn  arrows__btn--right">-></button>
+  </div>
+`;
+
 const screens = SCREEN_IDS.map((id) => document.querySelector(`#${id}`));
 const mainTemplate = document.querySelector(`.central`);
 let currentIndex = 0;
-let isAlt = false;
 
 function clearScreen() {
   mainTemplate.innerHTML = ``;
@@ -36,24 +55,32 @@ function navigateBackward() {
 }
 
 function changeScreen(evt) {
-  if (evt.keyCode === 18) {
-    isAlt = true;
-  }
-
-  if (evt.keyCode === 39 && isAlt) {
-    navigateForward();
-  } else if (event.keyCode === 37 && isAlt) {
-    navigateBackward();
-  }
-}
-
-function disableAltKey(evt) {
-  if (evt.keyCode === 18) {
-    isAlt = false;
+  if (evt.altKey) {
+    switch (evt.keyCode) {
+      case 39:
+        navigateForward();
+        break;
+      case 37:
+        navigateBackward();
+        break;
+    }
   }
 }
 
-document.addEventListener(`keydown`, changeScreen);
-document.addEventListener(`keyup`, disableAltKey);
+function showNavigationArrows() {
+  document.body.insertAdjacentHTML(`beforeend`, ARROWS_TEMPLATE);
+}
 
+function addAppHandlers() {
+  document.addEventListener(`keydown`, changeScreen);
+
+  const leftArrow = document.querySelector(`.arrows__btn--left`);
+  const rightArrow = document.querySelector(`.arrows__btn--right`);
+
+  leftArrow.addEventListener(`click`, navigateBackward);
+  rightArrow.addEventListener(`click`, navigateForward);
+}
+
+showNavigationArrows();
+addAppHandlers();
 renderScreen(currentIndex);

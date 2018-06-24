@@ -27,20 +27,19 @@ const ARROWS_TEMPLATE = `
   </div>
 `;
 
+const DIRECTION = {
+  backward: 37,
+  forward: 39
+};
+
 const screens = SCREEN_IDS.map((id) => document.querySelector(`#${id}`));
 const mainTemplate = document.querySelector(`.central`);
 let currentIndex = 0;
 
-function clearScreen() {
-  mainTemplate.innerHTML = ``;
-}
-
 function renderScreen(index) {
   if (screens[index]) {
     currentIndex = index;
-
-    clearScreen();
-
+    mainTemplate.innerHTML = ``;
     const currentScreen = screens[index].content;
     mainTemplate.appendChild(currentScreen.cloneNode(true));
   }
@@ -57,30 +56,23 @@ function navigateBackward() {
 function changeScreen(evt) {
   if (evt.altKey) {
     switch (evt.keyCode) {
-      case 39:
+      case DIRECTION.forward:
         navigateForward();
         break;
-      case 37:
+      case DIRECTION.backward:
         navigateBackward();
         break;
     }
   }
 }
 
-function showNavigationArrows() {
-  document.body.insertAdjacentHTML(`beforeend`, ARROWS_TEMPLATE);
-}
+document.body.insertAdjacentHTML(`beforeend`, ARROWS_TEMPLATE);
 
-function addAppHandlers() {
-  document.addEventListener(`keydown`, changeScreen);
+const leftArrow = document.querySelector(`.arrows__btn--left`);
+const rightArrow = document.querySelector(`.arrows__btn--right`);
 
-  const leftArrow = document.querySelector(`.arrows__btn--left`);
-  const rightArrow = document.querySelector(`.arrows__btn--right`);
+document.addEventListener(`keydown`, changeScreen);
+leftArrow.addEventListener(`click`, navigateBackward);
+rightArrow.addEventListener(`click`, navigateForward);
 
-  leftArrow.addEventListener(`click`, navigateBackward);
-  rightArrow.addEventListener(`click`, navigateForward);
-}
-
-showNavigationArrows();
-addAppHandlers();
 renderScreen(currentIndex);

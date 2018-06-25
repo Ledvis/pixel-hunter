@@ -1,4 +1,6 @@
 import getElementFromTemplate from './getElementFromTemplate';
+import renderScreen from './renderScreen';
+import game2Screen from './game-2';
 
 const html = getElementFromTemplate(`
   <header class="header">
@@ -67,5 +69,22 @@ const html = getElementFromTemplate(`
     </div>
   </footer>
 `);
+
+const inputNames = [
+  `question1`,
+  `question2`
+];
+
+const formGame = html.querySelector(`.game__content`);
+
+formGame.addEventListener(`input`, function() {
+  const result = inputNames.every((name) => {
+    return Array.from(formGame.elements[name]).some((field) => field.checked);
+  });
+
+  if (result) {
+    renderScreen(game2Screen);
+  }
+});
 
 export default html;

@@ -1,4 +1,7 @@
 import getElementFromTemplate from './getElementFromTemplate';
+import renderScreen from './renderScreen';
+import game1Screen from './game-1';
+import greetingScreen from './greeting';
 
 const html = getElementFromTemplate(`
   <header class="header">
@@ -36,5 +39,28 @@ const html = getElementFromTemplate(`
     </div>
   </footer>
 `);
+
+const backButtonScreen = html.querySelector(`.back`);
+const formRules = html.querySelector(`.rules__form`);
+const inputRules = html.querySelector(`.rules__input`);
+const buttonRules = html.querySelector(`.rules__button`);
+
+backButtonScreen.addEventListener(`click`, function() {
+  renderScreen(greetingScreen);
+});
+
+function validateForm() {
+  buttonRules.disabled = !inputRules.value.length > 0;
+}
+
+inputRules.addEventListener(`input`, validateForm);
+
+formRules.addEventListener(`submit`, function(evt) {
+  evt.preventDefault();
+
+  if (!buttonRules.disabled) {
+    renderScreen(game1Screen);
+  }
+});
 
 export default html;

@@ -1,4 +1,6 @@
 import getElementFromTemplate from './getElementFromTemplate';
+import renderScreen from './renderScreen';
+import greetingScreen from './greeting';
 
 const html = getElementFromTemplate(`
   <div id="main" class="central__content">
@@ -18,5 +20,10 @@ const html = getElementFromTemplate(`
     </div>
   </footer>
 `);
+
+const btnShowNextScreen = html.querySelector(`.intro__asterisk`);
+btnShowNextScreen.addEventListener(`click`, function() {
+  renderScreen(greetingScreen);
+});
 
 export default html;

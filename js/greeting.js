@@ -1,4 +1,6 @@
 import getElementFromTemplate from './getElementFromTemplate';
+import renderScreen from './renderScreen';
+import rulesScreen from './rules';
 
 const html = getElementFromTemplate(`
   <div class="greeting central--blur">
@@ -25,5 +27,10 @@ const html = getElementFromTemplate(`
     </div>
   </footer>
 `);
+
+const btnShowNextScreen = html.querySelector(`.greeting__continue`);
+btnShowNextScreen.addEventListener(`click`, function() {
+  renderScreen(rulesScreen);
+});
 
 export default html;

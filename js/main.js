@@ -1,7 +1,4 @@
 import renderScreen from './renderScreen';
-import introScreen from './introScreen';
-import arrowsTemplate from './arrowsTemplate';
-
-document.body.appendChild(arrowsTemplate);
+import introScreen from './intro';
 
 renderScreen(introScreen);

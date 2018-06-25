@@ -1,4 +1,6 @@
 import getElementFromTemplate from './getElementFromTemplate';
+import renderScreen from './renderScreen';
+import statsScreen from './stats';
 
 const html = getElementFromTemplate(`
   <header class="header">
@@ -54,5 +56,13 @@ const html = getElementFromTemplate(`
   </div>
   </footer>
 `);
+
+const gameOptions = html.querySelectorAll(`.game__option`);
+
+[].forEach.call(gameOptions, (option) => {
+  option.addEventListener(`click`, function() {
+    renderScreen(statsScreen);
+  });
+});
 
 export default html;

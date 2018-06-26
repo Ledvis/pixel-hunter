@@ -1,4 +1,6 @@
-import getElementFromTemplate from './get-element-from-template';
+import {
+  getElementFromTemplate
+} from './util';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`

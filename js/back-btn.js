@@ -1,4 +1,6 @@
-import renderScreen from './render-screen';
+import {
+  renderScreen
+} from './util';
 
 const html = `
   <button class="back">

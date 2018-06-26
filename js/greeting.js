@@ -1,5 +1,7 @@
-import getElementFromTemplate from './get-element-from-template';
-import renderScreen from './render-screen';
+import {
+  getElementFromTemplate,
+  renderScreen
+} from './util';
 import rulesScreen from './rules';
 import footer from './page-footer';
 

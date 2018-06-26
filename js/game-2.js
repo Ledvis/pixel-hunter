@@ -1,5 +1,7 @@
-import getElementFromTemplate from './get-element-from-template';
-import renderScreen from './render-screen';
+import {
+  getElementFromTemplate,
+  renderScreen
+} from './util';
 import game3Screen from './game-3';
 import header from './game-header';
 import footer from './page-footer';

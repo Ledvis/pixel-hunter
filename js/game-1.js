@@ -2,6 +2,10 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
+import {
+  onBackBtnClick,
+  renderBtnBack
+} from './back-btn';
 import game2Screen from './game-2';
 import header from './game-header';
 import footer from './page-footer';
@@ -60,6 +64,11 @@ formGame.addEventListener(`input`, function() {
 
   if (answers.length === requiredAnswers) {
     renderScreen(game2Screen);
+    renderBtnBack(game2Screen);
+    const btnBack = document.querySelector(`.back`);
+    btnBack.addEventListener(`click`, function() {
+      onBackBtnClick(html);
+    });
   }
 });
 

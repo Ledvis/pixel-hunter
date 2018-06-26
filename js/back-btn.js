@@ -17,4 +17,11 @@ function onBackBtnClick(template) {
 const btnBack = html.querySelector(`.back`);
 btnBack.addEventListener(`click`, onBackBtnClick);
 
-export default html.innerHTML;
+function renderBtnBack(container) {
+  container.querySelector(`.header__back`).insertAdjacentHTML(`afterbegin`, html.innerHTML);
+}
+
+export {
+  onBackBtnClick,
+  renderBtnBack
+};

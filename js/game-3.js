@@ -2,6 +2,11 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
+import {
+  onBackBtnClick,
+  renderBtnBack
+} from './back-btn';
+
 import statsScreen from './stats';
 import header from './game-header';
 import footer from './page-footer';
@@ -42,7 +47,14 @@ const html = getElementFromTemplate(`
 const gameOptions = html.querySelectorAll(`.game__option`);
 
 [].forEach.call(gameOptions, (option) => {
-  option.addEventListener(`click`, () => renderScreen(statsScreen));
+  option.addEventListener(`click`, function() {
+    renderScreen(statsScreen);
+    renderBtnBack(statsScreen);
+    const btnBack = document.querySelector(`.back`);
+    btnBack.addEventListener(`click`, function() {
+      onBackBtnClick(html);
+    });
+  });
 });
 
 export default html;

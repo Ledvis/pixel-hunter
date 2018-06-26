@@ -3,14 +3,15 @@ import {
   renderScreen
 } from './util';
 import game1Screen from './game-1';
-import greetingScreen from './greeting';
-import backBtnTemplate from './back-btn';
+import {
+  onBackBtnClick,
+  renderBtnBack
+} from './back-btn';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
   <header class="header">
     <div class="header__back">
-      ${backBtnTemplate}
     </div>
   </header>
   <div class="rules">
@@ -47,6 +48,11 @@ formRules.addEventListener(`submit`, function(evt) {
 
   if (!buttonRules.disabled) {
     renderScreen(game1Screen);
+    renderBtnBack(game1Screen);
+    const btnBack = document.querySelector(`.back`);
+    btnBack.addEventListener(`click`, function() {
+      onBackBtnClick(html);
+    });
   }
 });
 

@@ -4,10 +4,7 @@ import {
 } from './util';
 import game1Screen from './game-1';
 import greetingScreen from './greeting';
-import {
-  backBtnTemplate,
-  onBackBtnClick
-} from './back-btn';
+import backBtnTemplate from './back-btn';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
@@ -34,9 +31,6 @@ const html = getElementFromTemplate(`
   </div>
   ${footer}
 `);
-
-const backButtonScreen = html.querySelector(`.back`);
-backButtonScreen.addEventListener(`click`, () => onBackBtnClick(greetingScreen));
 
 const formRules = html.querySelector(`.rules__form`);
 const inputRules = html.querySelector(`.rules__input`);

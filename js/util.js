@@ -6,9 +6,9 @@ function renderScreen(element) {
 }
 
 function getElementFromTemplate(templateString) {
-  const templateElement = document.createElement(`template`);
+  const templateElement = document.createElement(`div`);
   templateElement.innerHTML = templateString.trim();
-  return templateElement.content;
+  return templateElement;
 }
 
 export {

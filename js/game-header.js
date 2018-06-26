@@ -1,7 +1,4 @@
-import {
-  backBtnTemplate,
-  onBackBtnClick
-} from './back-btn';
+import backBtnTemplate from './back-btn';
 
 const html = `
   <header class="header">
@@ -16,8 +13,5 @@ const html = `
     </div>
   </header>
 `;
-
-// const backButtonScreen = html.querySelector(`.back`);
-// backButtonScreen.addEventListener(`click`, onBackBtnClick);
 
 export default html;

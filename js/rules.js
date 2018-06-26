@@ -1,10 +1,19 @@
 import getElementFromTemplate from './get-element-from-template';
 import renderScreen from './render-screen';
 import game1Screen from './game-1';
-import {backBtnTemplate, onBackBtnClick} from './back-btn';
+import greetingScreen from './greeting';
+import {
+  backBtnTemplate,
+  onBackBtnClick
+} from './back-btn';
+import footer from './page-footer';
 
 const html = getElementFromTemplate(`
-  ${backBtnTemplate}
+  <header class="header">
+    <div class="header__back">
+      ${backBtnTemplate}
+    </div>
+  </header>
   <div class="rules">
     <h1 class="rules__title">Правила</h1>
     <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
@@ -21,20 +30,11 @@ const html = getElementFromTemplate(`
       <button class="rules__button  continue" type="submit" disabled>Go!</button>
     </form>
   </div>
-  <footer class="footer">
-  <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-  <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-    <div class="footer__social-links">
-      <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-      <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-      <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-      <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-    </div>
-  </footer>
+  ${footer}
 `);
 
 const backButtonScreen = html.querySelector(`.back`);
-backButtonScreen.addEventListener(`click`, onBackBtnClick);
+backButtonScreen.addEventListener(`click`, () => onBackBtnClick(greetingScreen));
 
 const formRules = html.querySelector(`.rules__form`);
 const inputRules = html.querySelector(`.rules__input`);

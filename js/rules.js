@@ -1,17 +1,10 @@
 import getElementFromTemplate from './get-element-from-template';
 import renderScreen from './render-screen';
 import game1Screen from './game-1';
-import greetingScreen from './greeting';
+import {backBtnTemplate, onBackBtnClick} from './back-btn';
 
 const html = getElementFromTemplate(`
-  <header class="header">
-    <div class="header__back">
-      <button class="back">
-        <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-        <img src="img/logo_small.svg" width="101" height="44">
-      </button>
-    </div>
-  </header>
+  ${backBtnTemplate}
   <div class="rules">
     <h1 class="rules__title">Правила</h1>
     <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
@@ -41,11 +34,11 @@ const html = getElementFromTemplate(`
 `);
 
 const backButtonScreen = html.querySelector(`.back`);
+backButtonScreen.addEventListener(`click`, onBackBtnClick);
+
 const formRules = html.querySelector(`.rules__form`);
 const inputRules = html.querySelector(`.rules__input`);
 const buttonRules = html.querySelector(`.rules__button`);
-
-backButtonScreen.addEventListener(`click`, () => renderScreen(greetingScreen));
 
 function validateForm() {
   buttonRules.disabled = !inputRules.value.length > 0;

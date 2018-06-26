@@ -1,5 +1,5 @@
-import getElementFromTemplate from './getElementFromTemplate';
-import renderScreen from './renderScreen';
+import getElementFromTemplate from './get-element-from-template';
+import renderScreen from './render-screen';
 import statsScreen from './stats';
 
 const html = getElementFromTemplate(`
@@ -60,9 +60,7 @@ const html = getElementFromTemplate(`
 const gameOptions = html.querySelectorAll(`.game__option`);
 
 [].forEach.call(gameOptions, (option) => {
-  option.addEventListener(`click`, function() {
-    renderScreen(statsScreen);
-  });
+  option.addEventListener(`click`, () => renderScreen(statsScreen));
 });
 
 export default html;

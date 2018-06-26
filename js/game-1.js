@@ -1,5 +1,5 @@
-import getElementFromTemplate from './getElementFromTemplate';
-import renderScreen from './renderScreen';
+import getElementFromTemplate from './get-element-from-template';
+import renderScreen from './render-screen';
 import game2Screen from './game-2';
 
 const html = getElementFromTemplate(`

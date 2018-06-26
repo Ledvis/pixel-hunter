@@ -1,5 +1,5 @@
-import getElementFromTemplate from './getElementFromTemplate';
-import renderScreen from './renderScreen';
+import getElementFromTemplate from './get-element-from-template';
+import renderScreen from './render-screen';
 import greetingScreen from './greeting';
 
 const html = getElementFromTemplate(`
@@ -22,8 +22,6 @@ const html = getElementFromTemplate(`
 `);
 
 const btnShowNextScreen = html.querySelector(`.intro__asterisk`);
-btnShowNextScreen.addEventListener(`click`, function() {
-  renderScreen(greetingScreen);
-});
+btnShowNextScreen.addEventListener(`click`, () => renderScreen(greetingScreen));
 
 export default html;

@@ -1,5 +1,5 @@
-import getElementFromTemplate from './getElementFromTemplate';
-import renderScreen from './renderScreen';
+import getElementFromTemplate from './get-element-from-template';
+import renderScreen from './render-screen';
 import rulesScreen from './rules';
 
 const html = getElementFromTemplate(`
@@ -29,8 +29,6 @@ const html = getElementFromTemplate(`
 `);
 
 const btnShowNextScreen = html.querySelector(`.greeting__continue`);
-btnShowNextScreen.addEventListener(`click`, function() {
-  renderScreen(rulesScreen);
-});
+btnShowNextScreen.addEventListener(`click`, () => renderScreen(rulesScreen));
 
 export default html;

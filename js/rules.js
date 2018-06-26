@@ -1,5 +1,5 @@
-import getElementFromTemplate from './getElementFromTemplate';
-import renderScreen from './renderScreen';
+import getElementFromTemplate from './get-element-from-template';
+import renderScreen from './render-screen';
 import game1Screen from './game-1';
 import greetingScreen from './greeting';
 
@@ -45,9 +45,7 @@ const formRules = html.querySelector(`.rules__form`);
 const inputRules = html.querySelector(`.rules__input`);
 const buttonRules = html.querySelector(`.rules__button`);
 
-backButtonScreen.addEventListener(`click`, function() {
-  renderScreen(greetingScreen);
-});
+backButtonScreen.addEventListener(`click`, () => renderScreen(greetingScreen));
 
 function validateForm() {
   buttonRules.disabled = !inputRules.value.length > 0;

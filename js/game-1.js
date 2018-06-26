@@ -52,19 +52,13 @@ const html = getElementFromTemplate(`
   ${footer}
 `);
 
-const inputNames = [
-  `question1`,
-  `question2`
-];
-
+const requiredAnswers = 2;
 const formGame = html.querySelector(`.game__content`);
 
 formGame.addEventListener(`input`, function() {
-  const result = inputNames.every((name) => {
-    return Array.from(formGame.elements[name]).some((field) => field.checked);
-  });
+  const answers = Array.from(formGame.elements).filter((field) => field.checked);
 
-  if (result) {
+  if (answers.length === requiredAnswers) {
     renderScreen(game2Screen);
   }
 });

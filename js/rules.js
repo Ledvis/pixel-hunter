@@ -2,11 +2,10 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
-import game1Screen from './game-1';
 import {
-  onBackBtnClick,
   renderBtnBack
 } from './back-btn';
+import game1Screen from './game-1';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
@@ -49,10 +48,6 @@ formRules.addEventListener(`submit`, function(evt) {
   if (!buttonRules.disabled) {
     renderScreen(game1Screen);
     renderBtnBack(game1Screen);
-    const btnBack = document.querySelector(`.back`);
-    btnBack.addEventListener(`click`, function() {
-      onBackBtnClick(html);
-    });
   }
 });
 

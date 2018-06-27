@@ -2,11 +2,10 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
-import rulesScreen from './rules';
 import {
-  onBackBtnClick,
   renderBtnBack
 } from './back-btn';
+import rulesScreen from './rules';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
@@ -30,10 +29,6 @@ const btnShowNextScreen = html.querySelector(`.greeting__continue`);
 btnShowNextScreen.addEventListener(`click`, function() {
   renderScreen(rulesScreen);
   renderBtnBack(rulesScreen);
-  const btnBack = document.querySelector(`.back`);
-  btnBack.addEventListener(`click`, function() {
-    onBackBtnClick(html);
-  });
 });
 
 export default html;

@@ -10,18 +10,29 @@ const html = getElementFromTemplate(`
   </button>
 `);
 
-function onBackBtnClick(template) {
-  renderScreen(template);
+let greetingScreen = null;
+
+function getGreetingScreen(template) {
+  greetingScreen = template;
 }
 
-const btnBack = html.querySelector(`.back`);
-btnBack.addEventListener(`click`, onBackBtnClick);
+function onBackBtnClick() {
+  renderScreen(greetingScreen);
+}
 
 function renderBtnBack(container) {
-  container.querySelector(`.header__back`).insertAdjacentHTML(`afterbegin`, html.innerHTML);
+  let btnBack = document.querySelector(`.back`);
+
+  if (btnBack) {
+    btnBack.addEventListener(`click`, onBackBtnClick);
+  } else {
+    container.querySelector(`.header__back`).insertAdjacentHTML(`afterbegin`, html.innerHTML);
+    btnBack = document.querySelector(`.back`);
+    btnBack.addEventListener(`click`, onBackBtnClick);
+  }
 }
 
 export {
-  onBackBtnClick,
-  renderBtnBack
+  renderBtnBack,
+  getGreetingScreen
 };

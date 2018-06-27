@@ -3,7 +3,6 @@ import {
   renderScreen
 } from './util';
 import {
-  onBackBtnClick,
   renderBtnBack
 } from './back-btn';
 import game3Screen from './game-3';
@@ -53,10 +52,6 @@ formGame.addEventListener(`input`, function() {
   if (result) {
     renderScreen(game3Screen);
     renderBtnBack(game3Screen);
-    const btnBack = document.querySelector(`.back`);
-    btnBack.addEventListener(`click`, function() {
-      onBackBtnClick(html);
-    });
   }
 });
 

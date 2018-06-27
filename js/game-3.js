@@ -3,10 +3,8 @@ import {
   renderScreen
 } from './util';
 import {
-  onBackBtnClick,
   renderBtnBack
 } from './back-btn';
-
 import statsScreen from './stats';
 import header from './game-header';
 import footer from './page-footer';
@@ -50,10 +48,6 @@ const gameOptions = html.querySelectorAll(`.game__option`);
   option.addEventListener(`click`, function() {
     renderScreen(statsScreen);
     renderBtnBack(statsScreen);
-    const btnBack = document.querySelector(`.back`);
-    btnBack.addEventListener(`click`, function() {
-      onBackBtnClick(html);
-    });
   });
 });
 

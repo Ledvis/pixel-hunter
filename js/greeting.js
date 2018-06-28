@@ -3,6 +3,7 @@ import {
   getElementFromTemplate
 } from './util';
 import rulesScreen from './rules';
+import renderBackBtn from './btn-back';
 import footer from './footer-page';
 
 const html = getElementFromTemplate(`
@@ -25,6 +26,7 @@ const html = getElementFromTemplate(`
 const btnNextScreenArrow = html.querySelector(`.greeting__continue`);
 btnNextScreenArrow.addEventListener(`click`, function() {
   renderScreen(rulesScreen);
+  renderBackBtn(rulesScreen);
 });
 
 export default html;

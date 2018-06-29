@@ -6,10 +6,11 @@
   "env": {
     "es6": true,
     "browser": true,
-    "commonjs": true
+    "commonjs": true,
+    "mocha": true
   },
   "extends": "htmlacademy/es6",
   "rules": {
-    "space-before-function-paren":"off"
+    "space-before-function-paren": "off"
   }
 }

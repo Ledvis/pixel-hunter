@@ -288,31 +288,31 @@ const testAnswersArr = [
 ];
 
 describe(`Game score count`, function() {
-  it(`should return -1 when answers count is less than 10; time all normal; lives count 3`, function() {
+  it(`should return -1 when answers count is less than 10; time all normal; lives number 3`, function() {
     assert.equal(countScore(testAnswersArr[0], 3), -1);
   });
-  it(`should return -1 when all answers are correct; time all normal; lives count 0`, function() {
+  it(`should return -1 when all answers are correct; time all normal; lives number 0`, function() {
     assert.equal(countScore(testAnswersArr[1], 0), -1);
   });
-  it(`should return 1150 when all answers are correct; time all normal; lives count 3`, function() {
+  it(`should return 1150 when all answers are correct; time all normal; lives number 3`, function() {
     assert.equal(countScore(testAnswersArr[1], 3), 1150);
   });
-  it(`should return 50 when all answers are wrong; time all fast; lives count 1`, function() {
+  it(`should return 50 when all answers are wrong; time all fast; lives number 1`, function() {
     assert.equal(countScore(testAnswersArr[2], 1), 50);
   });
-  it(`should return 50 when all answers are wrong; time all normal; lives count 1`, function() {
+  it(`should return 50 when all answers are wrong; time all normal; lives number 1`, function() {
     assert.equal(countScore(testAnswersArr[3], 1), 50);
   });
-  it(`should return 1500 when all answers are correct; time 9 fast, 1 normal; lives count 1`, function() {
+  it(`should return 1500 when all answers are correct; time 9 fast, 1 normal; lives number 1`, function() {
     assert.equal(countScore(testAnswersArr[4], 1), 1500);
   });
-  it(`should return 1050 when all answers are correct; time 3 slow, 5 normal, 2 fast; lives count 2`, function() {
+  it(`should return 1050 when all answers are correct; time 3 slow, 5 normal, 2 fast; lives number 2`, function() {
     assert.equal(countScore(testAnswersArr[5], 2), 1050);
   });
-  it(`should return 600 when 3 answers are correct, 7 answers are not correct; time 5 fast, 4 normal, 1 fast; lives count is 3`, function() {
+  it(`should return 600 when 3 answers are correct, 7 answers are not correct; time 5 fast, 4 normal, 1 fast; lives number is 3`, function() {
     assert.equal(countScore(testAnswersArr[6], 3), 600);
   });
-  it(`should return 1100 when 9 answers are correct, 1 answer is not correct; time 4 fast, 3 normal, 2 slow; lives count is 1`, () => {
+  it(`should return 1100 when 9 answers are correct, 1 answer is not correct; time 4 fast, 3 normal, 2 slow; lives number is 1`, () => {
     assert.equal(countScore(testAnswersArr[7], 1), 1100);
   });
 });

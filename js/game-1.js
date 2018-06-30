@@ -68,7 +68,7 @@ const questions = [
 const formGame = html.querySelector(`.game__content`);
 formGame.addEventListener(`input`, function() {
   const result = questions.every((question) => {
-    return Array.from(this.elements[question]).some((input) => input.checked);
+    return Array.from(formGame.elements[question]).some((input) => input.checked);
   });
 
   if (result) {

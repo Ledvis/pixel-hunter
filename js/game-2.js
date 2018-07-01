@@ -6,11 +6,10 @@ import {
   renderBtnBack
 } from './back-btn';
 import game3Screen from './game-3';
-import header from './game-header';
+import renderHeader from './game-header';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
-  ${header}
   <div class="game">
     <p class="game__task">Угадай, фото или рисунок?</p>
     <form class="game__content  game__content--wide">
@@ -50,6 +49,7 @@ const inputQuestions = html.querySelectorAll(`[name="question1"]`);
 formGame.addEventListener(`input`, function() {
   let result = [...inputQuestions].some((field) => field.checked);
   if (result) {
+    renderHeader(game3Screen);
     renderScreen(game3Screen);
     renderBtnBack(game3Screen);
   }

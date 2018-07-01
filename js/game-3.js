@@ -6,11 +6,10 @@ import {
   renderBtnBack
 } from './back-btn';
 import statsScreen from './stats';
-import header from './game-header';
+import renderHeader from './game-header';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
-  ${header}
   <div class="game">
   <p class="game__task">Найдите рисунок среди изображений</p>
   <form class="game__content  game__content--triple">
@@ -46,6 +45,7 @@ const gameOptions = html.querySelectorAll(`.game__option`);
 
 [].forEach.call(gameOptions, (option) => {
   option.addEventListener(`click`, function() {
+    renderHeader(statsScreen);
     renderScreen(statsScreen);
     renderBtnBack(statsScreen);
   });

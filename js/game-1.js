@@ -6,11 +6,10 @@ import {
   renderBtnBack
 } from './back-btn';
 import game2Screen from './game-2';
-import header from './game-header';
+import renderHeader from './game-header';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
-  ${header}
   <div class="game">
     <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
     <form class="game__content">
@@ -62,6 +61,7 @@ formGame.addEventListener(`input`, function() {
   const answers = Array.from(formGame.elements).filter((field) => field.checked);
 
   if (answers.length === requiredAnswers) {
+    renderHeader(game2Screen);
     renderScreen(game2Screen);
     renderBtnBack(game2Screen);
   }

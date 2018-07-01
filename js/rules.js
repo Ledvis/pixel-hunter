@@ -6,6 +6,7 @@ import {
   renderBtnBack
 } from './back-btn';
 import game1Screen from './game-1';
+import renderHeader from './game-header';
 import footer from './page-footer';
 
 const html = getElementFromTemplate(`
@@ -46,6 +47,7 @@ formRules.addEventListener(`submit`, function(evt) {
   evt.preventDefault();
 
   if (!buttonRules.disabled) {
+    renderHeader(game1Screen);
     renderScreen(game1Screen);
     renderBtnBack(game1Screen);
   }

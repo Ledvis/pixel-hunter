@@ -12,19 +12,54 @@ const imagesURL = {
 };
 
 const levelsType = {
-  'single': {
+  '1': {
     question: `Угадайте для каждого изображения фото или рисунок?`,
+    type: `single`,
     answers: [{
       image: imagesURL.paintings[0],
       type: `painting`
     }]
   },
-  'double': {
+  '2': {
     question: `Угадай, фото или рисунок?`,
+    type: `double`,
+    answers: [{
+      type: `photo`,
+      url: imagesURL.photos[0]
+    },
+    {
+      type: `painting`,
+      url: imagesURL.paintings[1]
+    }
+    ]
   },
-  'triple': {
+  '3': {
     question: `Найдите рисунок среди изображений`,
+    type: `triple`,
+    answers: [{
+      type: `photo`,
+      url: imagesURL.photos[1]
+    },
+    {
+      type: `painting`,
+      url: imagesURL.paintings[2]
+    },
+    {
+      type: `photo`,
+      url: imagesURL.photos[2]
+    }
+    ]
   }
 };
 
-export default levelsData;
+const LEVELS_COUNT = 3;
+
+export function generateLevelsData() {
+  const data = [];
+
+  for (let i = 0; i < LEVELS_COUNT; i++) {
+    data.push(levelsType[i]);
+  }
+
+  return data;
+}

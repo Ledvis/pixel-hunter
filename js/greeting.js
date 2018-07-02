@@ -6,7 +6,7 @@ import {
   renderBtnBack
 } from './back-btn';
 import rulesScreen from './rules';
-import footer from './page-footer';
+import footerTemplate from './page-footer';
 
 const html = getElementFromTemplate(`
   <div class="greeting central--blur">
@@ -22,7 +22,7 @@ const html = getElementFromTemplate(`
       </div>
     <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
   </div>
-  ${footer}
+  ${footerTemplate}
 `);
 
 const btnShowNextScreen = html.querySelector(`.greeting__continue`);

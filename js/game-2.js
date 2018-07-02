@@ -7,7 +7,7 @@ import {
 } from './back-btn';
 import game3Screen from './game-3';
 import renderHeader from './game-header';
-import footer from './page-footer';
+import footerTemplate from './page-footer';
 
 const html = getElementFromTemplate(`
   <div class="game">
@@ -40,7 +40,7 @@ const html = getElementFromTemplate(`
       </ul>
     </div>
   </div>
-  ${footer}
+  ${footerTemplate}
 `);
 
 const formGame = html.querySelector(`form`);

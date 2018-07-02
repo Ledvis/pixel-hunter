@@ -7,7 +7,7 @@ import {
 } from './back-btn';
 import statsScreen from './stats';
 import renderHeader from './game-header';
-import footer from './page-footer';
+import footerTemplate from './page-footer';
 
 const html = getElementFromTemplate(`
   <div class="game">
@@ -38,7 +38,7 @@ const html = getElementFromTemplate(`
     </ul>
   </div>
   </div>
-  ${footer}
+  ${footerTemplate}
 `);
 
 const gameOptions = html.querySelectorAll(`.game__option`);

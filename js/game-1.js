@@ -7,7 +7,7 @@ import {
 } from './back-btn';
 import game2Screen from './game-2';
 import renderHeader from './game-header';
-import footer from './page-footer';
+import footerTemplate from './page-footer';
 
 const html = getElementFromTemplate(`
   <div class="game">
@@ -51,7 +51,7 @@ const html = getElementFromTemplate(`
       </ul>
     </div>
   </div>
-  ${footer}
+  ${footerTemplate}
 `);
 
 const requiredAnswers = 2;

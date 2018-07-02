@@ -1,7 +1,7 @@
 import {
   getElementFromTemplate
 } from './util';
-import footer from './page-footer';
+import footerTemplate from './page-footer';
 
 const html = getElementFromTemplate(`
   <header class="header">
@@ -112,7 +112,7 @@ const html = getElementFromTemplate(`
     </tr>
   </table>
   </div>
-  ${footer}
+  ${footerTemplate}
 `);
 
 export default html;

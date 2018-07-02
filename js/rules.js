@@ -7,7 +7,7 @@ import {
 } from './back-btn';
 import game1Screen from './game-1';
 import renderHeader from './game-header';
-import footer from './page-footer';
+import footerTemplate from './page-footer';
 
 const html = getElementFromTemplate(`
   <header class="header">
@@ -30,7 +30,7 @@ const html = getElementFromTemplate(`
       <button class="rules__button  continue" type="submit" disabled>Go!</button>
     </form>
   </div>
-  ${footer}
+  ${footerTemplate}
 `);
 
 const formRules = html.querySelector(`.rules__form`);
@@ -38,7 +38,7 @@ const inputRules = html.querySelector(`.rules__input`);
 const buttonRules = html.querySelector(`.rules__button`);
 
 function validateForm() {
-  buttonRules.disabled = !inputRules.value.length > 0;
+  buttonRules.disabled = !inputRules.value.trim().length > 0;
 }
 
 inputRules.addEventListener(`input`, validateForm);

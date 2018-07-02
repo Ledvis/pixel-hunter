@@ -2,11 +2,9 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
-import {
-  renderBtnBack
-} from './back-btn';
 import rulesScreen from './rules';
 import footerTemplate from './page-footer';
+import renderBtnBack from './back-btn';
 
 const html = getElementFromTemplate(`
   <div class="greeting central--blur">

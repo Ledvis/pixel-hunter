@@ -2,9 +2,6 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
-import {
-  getGreetingScreen
-} from './back-btn';
 import greetingScreen from './greeting';
 import footer from './page-footer';
 
@@ -21,7 +18,6 @@ const html = getElementFromTemplate(`
 const btnShowNextScreen = html.querySelector(`.intro__asterisk`);
 btnShowNextScreen.addEventListener(`click`, function() {
   renderScreen(greetingScreen);
-  getGreetingScreen(greetingScreen);
 });
 
 export default html;

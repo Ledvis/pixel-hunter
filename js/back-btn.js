@@ -2,6 +2,7 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
+import greetingScreen from './greeting';
 
 const html = getElementFromTemplate(`
   <button class="back">
@@ -10,29 +11,13 @@ const html = getElementFromTemplate(`
   </button>
 `);
 
-let greetingScreen = null;
-
-function getGreetingScreen(template) {
-  greetingScreen = template;
-}
-
-function onBackBtnClick() {
+let btnBack = html.querySelector(`.back`);
+btnBack.addEventListener(`click`, function() {
   renderScreen(greetingScreen);
-}
+});
 
 function renderBtnBack(container) {
-  let btnBack = document.querySelector(`.back`);
-
-  if (btnBack) {
-    btnBack.addEventListener(`click`, onBackBtnClick);
-  } else {
-    container.querySelector(`.header__back`).insertAdjacentHTML(`afterbegin`, html.innerHTML);
-    btnBack = document.querySelector(`.back`);
-    btnBack.addEventListener(`click`, onBackBtnClick);
-  }
+  container.querySelector(`.header__back`).insertAdjacentElement(`afterbegin`, html);
 }
 
-export {
-  renderBtnBack,
-  getGreetingScreen
-};
+export default renderBtnBack;

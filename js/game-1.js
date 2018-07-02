@@ -2,12 +2,10 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
-import {
-  renderBtnBack
-} from './back-btn';
 import game2Screen from './game-2';
 import renderHeader from './game-header';
 import footerTemplate from './page-footer';
+import renderBtnBack from './back-btn';
 
 const html = getElementFromTemplate(`
   <div class="game">

@@ -83,20 +83,42 @@ function fillGameLevel(level) {
 const gameData = generateLevelsData();
 const gameContainer = getElementFromTemplate(`<div class="game"></div>${footerTemplate}`);
 
+renderHeader(gameContainer, gameState);
+
 function renderGameLevel(index) {
-  const gameBox = gameContainer.querySelector(`.game`);
   const level = gameData[index];
-  const gameLevel = fillGameLevel(level);
-
+  const gameBox = gameContainer.querySelector(`.game`);
   gameBox.innerHTML = ``;
+  gameBox.insertAdjacentHTML(`afterbegin`, fillGameLevel(level));
+  renderHeader(gameBox, gameState);
 
-  gameBox.insertAdjacentHTML(`afterbegin`, gameLevel);
+  switch (level.type) {
+    case `single`:
+      gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
+        renderGameLevel(++index);
+      });
+      break;
+    case `double`:
+      gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
+        const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
+
+        if (answers.length === 2) {
+          renderGameLevel(++index);
+        }
+      });
+      break;
+    case `triple`:
+      Array.from(gameBox.querySelectorAll(`.game__option`)).forEach((option) => {
+        option.addEventListener(`click`, () => {
+          renderGameLevel(++index);
+        });
+      });
+      break;
+  }
 
   renderStats(gameBox);
 }
 
 renderGameLevel(0);
-
-renderHeader(gameContainer, gameState);
 
 export default gameContainer;

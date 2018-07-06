@@ -6,7 +6,7 @@ function createHeader(state) {
   return getElementFromTemplate(`
     <header class="header">
       <div class="header__back"></div>
-      <h1 class="game__timer">NN</h1>
+      <h1 class="game__timer">${state.time}</h1>
       <div class="game__lives">
         ${new Array(3 - state.livesCount)
             .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)

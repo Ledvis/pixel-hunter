@@ -2,7 +2,7 @@ import {
   renderScreen,
   getElementFromTemplate
 } from './util';
-import game1Screen from './game-1';
+import game from './game';
 import renderBackBtn from './btn-back';
 import footer from './footer-page';
 
@@ -42,8 +42,8 @@ inputUserName.addEventListener(`input`, function(evt) {
 form.addEventListener(`submit`, function(evt) {
   evt.preventDefault();
   if (!buttonSubmitForm.disabled) {
-    renderScreen(game1Screen);
-    renderBackBtn(game1Screen);
+    renderScreen(game);
+    renderBackBtn(game);
   }
 });
 

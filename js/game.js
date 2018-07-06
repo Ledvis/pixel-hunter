@@ -80,6 +80,9 @@ function fillGameLevel(level) {
   return html;
 }
 
+const gameData = generateLevelsData();
+const gameContainer = getElementFromTemplate(`<div class="game"></div>${footerTemplate}`);
+
 function renderGameLevel(index) {
   const gameBox = gameContainer.querySelector(`.game`);
   const level = gameData[index];
@@ -88,14 +91,12 @@ function renderGameLevel(index) {
   gameBox.innerHTML = ``;
 
   gameBox.insertAdjacentHTML(`afterbegin`, gameLevel);
-}
 
-const gameData = generateLevelsData();
-const gameContainer = getElementFromTemplate(`<div class="game"></div>${footerTemplate}`);
+  renderStats(gameBox);
+}
 
 renderGameLevel(0);
 
 renderHeader(gameContainer, gameState);
-// renderStats(gameContainer.querySelector(`.game`));
 
 export default gameContainer;

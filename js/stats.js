@@ -3,7 +3,7 @@ import {
 } from './util';
 
 function createStats() {
-  getElementFromTemplate(`
+  return getElementFromTemplate(`
     <div class="stats">
       <ul class="stats">
         <li class="stats__result stats__result--wrong"></li>
@@ -22,5 +22,5 @@ function createStats() {
 }
 
 export default function renderStats(container) {
-  container.insertAdjacentHTML(`beforeend`, createStats());
+  container.insertAdjacentElement(`beforeend`, createStats());
 }

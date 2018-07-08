@@ -1,4 +1,4 @@
-const imagesURL = {
+const images = {
   paintings: [
     `https://k42.kn3.net/CF42609C8.jpg`,
     `https://k42.kn3.net/D2F0370D6.jpg`,
@@ -12,41 +12,41 @@ const imagesURL = {
 };
 
 const levelsType = {
-  '0': {
-    question: `Угадайте для каждого изображения фото или рисунок?`,
-    type: `single`,
-    answers: [{
-      image: imagesURL.paintings[1],
-      type: `painting`
-    }]
-  },
   '1': {
     question: `Угадай, фото или рисунок?`,
+    type: `single`,
+    answers: [{
+      type: `painting`,
+      url: images.paintings[1]
+    }]
+  },
+  '2': {
+    question: `Угадайте для каждого изображения фото или рисунок?`,
     type: `double`,
     answers: [{
-      image: imagesURL.photos[0],
-      type: `photo`
+      type: `photo`,
+      url: images.photos[0]
     },
     {
-      image: imagesURL.paintings[0],
-      type: `painting`
+      type: `painting`,
+      url: images.paintings[2]
     }
     ]
   },
-  '2': {
+  '3': {
     question: `Найдите рисунок среди изображений`,
     type: `triple`,
     answers: [{
-      image: imagesURL.photos[1],
-      type: `photo`
+      type: `photo`,
+      url: images.photos[1]
     },
     {
-      image: imagesURL.paintings[2],
-      type: `painting`
+      type: `painting`,
+      url: images.paintings[0]
     },
     {
-      image: imagesURL.photos[2],
-      type: `photo`
+      type: `photo`,
+      url: images.photos[2]
     }
     ]
   }
@@ -57,7 +57,7 @@ const LEVELS_COUNT = 3;
 export function generateLevelsData() {
   const data = [];
 
-  for (let i = 0; i < LEVELS_COUNT; i++) {
+  for (let i = 1; i <= LEVELS_COUNT; i++) {
     data.push(levelsType[i]);
   }
 
@@ -67,5 +67,7 @@ export function generateLevelsData() {
 export const gameState = {
   livesCount: 3,
   time: 50,
-  isOver: false
+  isOver: false,
+  username: ``,
+  answers: []
 };

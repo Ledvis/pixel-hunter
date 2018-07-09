@@ -86,34 +86,42 @@ const gameContainer = getElementFromTemplate(`<div class="game"></div>${footerTe
 renderHeader(gameContainer, gameState);
 
 function renderGameLevel(index) {
-  const level = gameData[index];
-  const gameBox = gameContainer.querySelector(`.game`);
-  gameBox.innerHTML = ``;
-  gameBox.insertAdjacentHTML(`afterbegin`, fillGameLevel(level));
-  renderHeader(gameBox, gameState);
+  if (index === gameData.length) {
+    gameState.isOver = true
+  }
 
-  switch (level.type) {
-    case `single`:
-      gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
-        renderGameLevel(++index);
-      });
-      break;
-    case `double`:
-      gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
-        const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
+  if (!gameState.isOver) {
+    const level = gameData[index];
+    const gameBox = gameContainer.querySelector(`.game`);
+    gameBox.innerHTML = ``;
+    gameBox.insertAdjacentHTML(`afterbegin`, fillGameLevel(level));
+    renderHeader(gameBox, gameState);
 
-        if (answers.length === 2) {
-          renderGameLevel(++index);
-        }
-      });
-      break;
-    case `triple`:
-      Array.from(gameBox.querySelectorAll(`.game__option`)).forEach((option) => {
-        option.addEventListener(`click`, () => {
+    switch (level.type) {
+      case `single`:
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
           renderGameLevel(++index);
         });
-      });
-      break;
+        break;
+      case `double`:
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
+          const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
+
+          if (answers.length === 2) {
+            renderGameLevel(++index);
+          }
+        });
+        break;
+      case `triple`:
+        Array.from(gameBox.querySelectorAll(`.game__option`)).forEach((option) => {
+          option.addEventListener(`click`, () => {
+            renderGameLevel(++index);
+          });
+        });
+        break;
+    } else {
+
+    }
   }
 
   renderStats(gameBox);

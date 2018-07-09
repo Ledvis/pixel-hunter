@@ -1,5 +1,6 @@
 import {
-  getElementFromTemplate
+  getElementFromTemplate,
+  renderScreen
 } from './util';
 import {
   generateGameData,
@@ -8,10 +9,11 @@ import {
 import {
   renderHeader
 } from './game-header';
-import stats from './stats';
+import renderStats from './stats';
+import renderResults from './results';
 import footer from './footer-page';
 
-const gameContainer = getElementFromTemplate(`<div class="game">${stats}</div>${footer}`);
+const gameContainer = getElementFromTemplate(`<div class="game"></div>${footer}`);
 const gameData = generateGameData();
 
 function fillGameLevel(level) {
@@ -86,12 +88,85 @@ function fillGameLevel(level) {
 }
 
 function renderGame(index) {
-  const level = gameData[index];
-  const gameBox = gameContainer.querySelector(`.game`);
-  gameBox.insertAdjacentHTML(`afterbegin`, fillGameLevel(level));
-  renderHeader(gameBox, initialGameState);
+  if (index === gameData.length) {
+    initialGameState.isOver = true;
+  }
+
+  if (!initialGameState.isOver) {
+    const level = gameData[index];
+    const gameBox = gameContainer.querySelector(`.game`);
+    gameBox.innerHTML = ``;
+    gameBox.insertAdjacentHTML(`afterbegin`, fillGameLevel(level));
+
+    if (!document.querySelector(`.header`)) {
+      renderHeader(gameBox, initialGameState);
+    }
+
+    switch (level.type) {
+      case `single`:
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
+          renderGame(++index);
+        });
+        break;
+
+      case `double`:
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
+          const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
+
+          if (answers.length === 2) {
+            renderGame(++index);
+          }
+        });
+        break;
+      case `triple`:
+        gameBox.querySelectorAll(`.game__option`).forEach((gameOption) => {
+          return gameOption.addEventListener(`click`, () => {
+            renderGame(++index);
+          });
+        });
+        break;
+    }
+
+    renderStats(gameBox);
+  } else {
+    renderScreen(renderResults(Object.assign(initialGameState, {
+      answers: [{
+        time: 15,
+        isRight: true
+      },
+      {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }, {
+        time: 15,
+        isRight: true
+      }
+      ]
+    })));
+  }
 }
 
-renderGame(2);
+renderGame(0);
 
 export default gameContainer;

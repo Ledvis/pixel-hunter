@@ -16,8 +16,6 @@ btnBack.addEventListener(`click`, function() {
   renderScreen(greetingScreen);
 });
 
-function renderBtnBack(container) {
+export default function renderBtnBack(container) {
   container.querySelector(`.header__back`).insertAdjacentElement(`afterbegin`, html);
 }
-
-export default renderBtnBack;

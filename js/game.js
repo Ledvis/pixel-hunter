@@ -1,13 +1,16 @@
 import {
   getElementFromTemplate,
+  renderScreen
 } from './util';
 import renderHeader from './game-header';
+import renderBtnBack from './back-btn';
 import {
   generateLevelsData,
   gameState
 } from './data';
 import footerTemplate from './page-footer';
 import renderStats from './stats';
+import getResults from './results';
 
 function fillGameLevel(level) {
   let html = ``;
@@ -87,7 +90,7 @@ renderHeader(gameContainer, gameState);
 
 function renderGameLevel(index) {
   if (index === gameData.length) {
-    gameState.isOver = true
+    gameState.isOver = true;
   }
 
   if (!gameState.isOver) {
@@ -119,12 +122,57 @@ function renderGameLevel(index) {
           });
         });
         break;
-    } else {
-
     }
-  }
 
-  renderStats(gameBox);
+    renderStats(gameBox);
+  } else {
+    const resultsScreen = getResults(Object.assign(gameState, {
+      answers: [{
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      },
+      {
+        isRight: true,
+        time: 15
+      }
+      ]
+    }));
+
+    renderScreen(resultsScreen);
+    renderBtnBack(resultsScreen);
+  }
 }
 
 renderGameLevel(0);

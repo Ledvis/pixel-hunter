@@ -56,7 +56,7 @@ function generateRandomRange(from, to) {
   return Math.floor((Math.random() * to) + from);
 }
 
-const LEVELS_COUNT = 10;
+const LEVELS_COUNT = 3;
 
 export function generateLevelsData() {
   const data = [];

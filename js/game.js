@@ -9,6 +9,7 @@ import {
 import {
   renderHeader
 } from './game-header';
+import renderBtnBack from './btn-back';
 import renderStats from './stats';
 import renderResults from './results';
 import footer from './footer-page';
@@ -129,7 +130,7 @@ function renderGame(index) {
 
     renderStats(gameBox);
   } else {
-    renderScreen(renderResults(Object.assign(initialGameState, {
+    const resultsScreen = renderResults(Object.assign(initialGameState, {
       answers: [{
         time: 15,
         isRight: true
@@ -153,17 +154,19 @@ function renderGame(index) {
         time: 15,
         isRight: true
       }, {
-        time: 15,
-        isRight: true
+        time: 5,
+        isRight: false
       }, {
-        time: 15,
-        isRight: true
+        time: 5,
+        isRight: false
       }, {
-        time: 15,
-        isRight: true
+        time: 5,
+        isRight: false
       }
       ]
-    })));
+    }));
+    renderScreen(resultsScreen);
+    renderBtnBack(resultsScreen);
   }
 }
 

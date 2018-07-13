@@ -12,10 +12,15 @@ const html = getElementFromTemplate(`
 `);
 
 let btnBack = html.querySelector(`.back`);
+
 btnBack.addEventListener(`click`, function() {
   renderScreen(greetingScreen);
 });
 
-export default function renderBtnBack(container) {
-  container.querySelector(`.header__back`).insertAdjacentElement(`afterbegin`, html);
+export default function renderBackButton(container) {
+  if (!container.classList.contains(`header`)) {
+    container = container.querySelector(`.header__back`);
+  }
+
+  container.insertAdjacentElement(`afterbegin`, btnBack);
 }

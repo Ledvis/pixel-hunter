@@ -4,19 +4,19 @@ import {
 import countScore from './count-score';
 import footerTemplate from './page-footer';
 
-export default function getResults(gameState) {
+export default function getResults(state) {
   return getElementFromTemplate(`
     <header class="header">
       <div class="header__back"></div>
     </header>
     <div class="result">
-      <h1>${gameState.isWin ? `Победа!` : `Поражение`}</h1>
+      <h1>${state.isWin ? `Победа!` : `Поражение`}</h1>
       <table class="result__table">
         <tr>
           <td class="result__number">1.</td>
           <td colspan="2">
             <ul class="stats">
-              ${gameState.answers.map((answer) => `<li class="stats__result stats__result--${answer.isRight ? `correct` : `wrong`}">${answer.time}</li>`).join(``)}
+              ${state.answers.map((answer) => `<li class="stats__result stats__result--${answer.isRight ? `correct` : `wrong`}">${answer.time}</li>`).join(``)}
               <!--<li class="stats__result stats__result--wrong"></li>
               <li class="stats__result stats__result--slow"></li>
               <li class="stats__result stats__result--fast"></li>
@@ -25,7 +25,7 @@ export default function getResults(gameState) {
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>
-          <td class="result__total">${gameState.answers.length * 100}</td>
+          <td class="result__total">${state.answers.length * 100}</td>
         </tr>
         <!--<tr>
           <td></td>
@@ -49,7 +49,7 @@ export default function getResults(gameState) {
           <td class="result__total">-100</td>
         </tr>-->
         <tr>
-          <td colspan="5" class="result__total  result__total--final">${countScore(gameState.answers, gameState.livesCount)}</td>
+          <td colspan="5" class="result__total  result__total--final">${countScore(state.answers, state.livesCount)}</td>
         </tr>
       </table>
     </div>

@@ -2,9 +2,8 @@ import {
   getElementFromTemplate,
   renderScreen
 } from './util';
-import gameScreen from './game';
+import gameContainer from './game';
 import footerTemplate from './page-footer';
-import renderBtnBack from './back-btn';
 
 const html = getElementFromTemplate(`
   <header class="header">
@@ -44,8 +43,7 @@ formRules.addEventListener(`submit`, function(evt) {
   evt.preventDefault();
 
   if (!buttonRules.disabled) {
-    renderScreen(gameScreen);
-    renderBtnBack(gameScreen);
+    renderScreen(gameContainer);
   }
 });
 

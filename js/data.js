@@ -11,46 +11,45 @@ const images = {
   ]
 };
 
-const levelsType = {
-  '1': {
-    question: `Угадай, фото или рисунок?`,
-    type: `single`,
-    answers: [{
-      type: `painting`,
-      url: images.paintings[1]
-    }]
+const levelsType = [{
+  question: `Угадай, фото или рисунок?`,
+  type: `single`,
+  answers: [{
+    type: `painting`,
+    url: images.paintings[1]
+  }]
+},
+{
+  question: `Угадайте для каждого изображения фото или рисунок?`,
+  type: `double`,
+  answers: [{
+    type: `photo`,
+    url: images.photos[0]
   },
-  '2': {
-    question: `Угадайте для каждого изображения фото или рисунок?`,
-    type: `double`,
-    answers: [{
-      type: `photo`,
-      url: images.photos[0]
-    },
-    {
-      type: `painting`,
-      url: images.paintings[2]
-    }
-    ]
-  },
-  '3': {
-    question: `Найдите рисунок среди изображений`,
-    type: `triple`,
-    answers: [{
-      type: `photo`,
-      url: images.photos[1]
-    },
-    {
-      type: `painting`,
-      url: images.paintings[0]
-    },
-    {
-      type: `photo`,
-      url: images.photos[2]
-    }
-    ]
+  {
+    type: `painting`,
+    url: images.paintings[2]
   }
-};
+  ]
+},
+{
+  question: `Найдите рисунок среди изображений`,
+  type: `triple`,
+  answers: [{
+    type: `photo`,
+    url: images.photos[1]
+  },
+  {
+    type: `painting`,
+    url: images.paintings[0]
+  },
+  {
+    type: `photo`,
+    url: images.photos[2]
+  }
+  ]
+}
+];
 
 function generateRandomRange(from, to) {
   return Math.floor((Math.random() * to) + from);
@@ -61,14 +60,14 @@ const LEVELS_COUNT = 3;
 export function generateLevelsData() {
   const data = [];
 
-  for (let i = 1; i <= LEVELS_COUNT; i++) {
-    data.push(levelsType[generateRandomRange(1, 3)]);
+  for (let i = 1; i < LEVELS_COUNT; i++) {
+    data.push(levelsType[generateRandomRange(0, 2)]);
   }
 
   return data;
 }
 
-export const gameState = {
+export const INITIAL_STATE = {
   livesCount: 3,
   time: 50,
   isOver: false,

@@ -2,23 +2,17 @@ import {
   getElementFromTemplate
 } from './util';
 
-function createStats() {
+function createStats(state) {
   return getElementFromTemplate(`
     <ul class="stats">
-      <li class="stats__result stats__result--wrong"></li>
-      <li class="stats__result stats__result--slow"></li>
+      ${state.answers.map((answer) => `<li class="stats__result stats__result--${answer.isRight ? `correct` : `wrong`}"></li>`).join(``)}
+      ${new Array(3 - state.answers.length).fill(`<li class="stats__result stats__result--unknown"></li>`).join(``)}
+      <!-- <li class="stats__result stats__result--slow"></li>
       <li class="stats__result stats__result--fast"></li>
-      <li class="stats__result stats__result--correct"></li>
-      <li class="stats__result stats__result--wrong"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--slow"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--fast"></li>
-      <li class="stats__result stats__result--unknown"></li>
     </ul>
   `);
 }
 
-export default function renderStats(container) {
-  container.insertAdjacentElement(`beforeend`, createStats());
+export default function renderStats(container, state) {
+  container.insertAdjacentElement(`beforeend`, createStats(state));
 }

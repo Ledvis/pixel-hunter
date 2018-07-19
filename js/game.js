@@ -4,18 +4,19 @@ import {
 } from './util';
 import {
   generateGameData,
-  initialGameState
+  INITIAL_GAME_STATE
 } from './data';
 import {
   renderHeader
 } from './game-header';
 import renderBtnBack from './btn-back';
 import renderStats from './stats';
-import renderResults from './results';
+import createResults from './results';
 import footer from './footer-page';
 
 const gameContainer = getElementFromTemplate(`<div class="game"></div>${footer}`);
 const gameData = generateGameData();
+const gameState = Object.assign({}, INITIAL_GAME_STATE);
 
 function fillGameLevel(level) {
   let html = ``;
@@ -72,14 +73,14 @@ function fillGameLevel(level) {
       html = `
         <p class="game__task">Найдите рисунок среди изображений</p>
         <form class="game__content  game__content--triple">
-          <div class="game__option">
+          <div class="game__option" data-type="photo">
             <img src="${level.answers[0].image}" alt="Option 1" width="304" height="455">
           </div>
-          <div class="game__option  game__option--selected">
-            <img src="${level.answers[1].image}" alt="Option 1" width="304" height="455">
+          <div class="game__option  game__option--selected" data-type="paint">
+            <img src="${level.answers[1].image}" alt="Option 2" width="304" height="455">
           </div>
-          <div class="game__option">
-            <img src="${level.answers[2].image}" alt="Option 1" width="304" height="455">
+          <div class="game__option" data-type="photo">
+            <img src="${level.answers[2].image}" alt="Option 3" width="304" height="455">
           </div>
         </form>
         `;
@@ -88,25 +89,32 @@ function fillGameLevel(level) {
   return html;
 }
 
+function switchLevel(index, answer) {
+  gameState.answers.push(answer);
+  if (!answer.isRight) {
+    gameState.livesCount--;
+  }
+  renderGame(++index);
+}
+
 function renderGame(index) {
-  if (index === gameData.length) {
-    initialGameState.isOver = true;
+  if (index === gameData.length || gameState.livesCount === 0) {
+    gameState.isOver = true;
   }
 
-  if (!initialGameState.isOver) {
+  if (!gameState.isOver) {
     const level = gameData[index];
     const gameBox = gameContainer.querySelector(`.game`);
     gameBox.innerHTML = ``;
     gameBox.insertAdjacentHTML(`afterbegin`, fillGameLevel(level));
 
-    if (!document.querySelector(`.header`)) {
-      renderHeader(gameBox, initialGameState);
-    }
-
     switch (level.type) {
       case `single`:
-        gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
-          renderGame(++index);
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
+          switchLevel(index, {
+            isRight: evt.currentTarget.elements[`question1`].value === level.answers[0].type,
+            time: 15 // Temporary hardcoded value
+          });
         });
         break;
 
@@ -115,56 +123,33 @@ function renderGame(index) {
           const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
 
           if (answers.length === 2) {
-            renderGame(++index);
+            switchLevel(index, {
+              isRight: answers.every((answer, answerIndex) => {
+                return answer === level.answers[answerIndex].type;
+              }
+              ),
+              time: 15 // Temporary hardcoded value
+            });
           }
         });
         break;
       case `triple`:
         gameBox.querySelectorAll(`.game__option`).forEach((gameOption) => {
-          return gameOption.addEventListener(`click`, () => {
-            renderGame(++index);
+          return gameOption.addEventListener(`click`, (evt) => {
+            switchLevel(index, {
+              isRight: evt.target.dataset.type === `paint`,
+              time: 15
+            });
           });
         });
         break;
     }
 
-    renderStats(gameBox);
+    console.log(gameBox);
+    renderHeader(gameBox, gameState);
+    renderStats(gameBox, gameState);
   } else {
-    const resultsScreen = renderResults(Object.assign(initialGameState, {
-      answers: [{
-        time: 15,
-        isRight: true
-      },
-      {
-        time: 15,
-        isRight: true
-      }, {
-        time: 15,
-        isRight: true
-      }, {
-        time: 15,
-        isRight: true
-      }, {
-        time: 15,
-        isRight: true
-      }, {
-        time: 15,
-        isRight: true
-      }, {
-        time: 15,
-        isRight: true
-      }, {
-        time: 5,
-        isRight: false
-      }, {
-        time: 5,
-        isRight: false
-      }, {
-        time: 5,
-        isRight: false
-      }
-      ]
-    }));
+    const resultsScreen = createResults(gameState);
     renderScreen(resultsScreen);
     renderBtnBack(resultsScreen);
   }

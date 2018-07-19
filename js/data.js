@@ -11,16 +11,16 @@ const imagesURL = {
   ]
 };
 
-const gameData = {
-  '1': {
+const gameData = [
+  {
     question: `Угадайте для каждого изображения фото или рисунок?`,
     type: `single`,
     answers: [{
       image: imagesURL.paintings[1],
-      type: `painting`
+      type: `paint`
     }]
   },
-  '2': {
+  {
     question: `Угадай, фото или рисунок?`,
     type: `double`,
     answers: [{
@@ -29,11 +29,11 @@ const gameData = {
     },
     {
       image: imagesURL.paintings[0],
-      type: `painting`
+      type: `paint`
     }
     ]
   },
-  '3': {
+  {
     question: `Найдите рисунок среди изображений`,
     type: `triple`,
     answers: [{
@@ -42,7 +42,7 @@ const gameData = {
     },
     {
       image: imagesURL.paintings[2],
-      type: `painting`
+      type: `paint`
     },
     {
       image: imagesURL.photos[2],
@@ -50,25 +50,25 @@ const gameData = {
     }
     ]
   }
-};
+];
 
 function getRandomRange(from, to) {
   return Math.floor((Math.random() * to) + from);
 }
 
-const LEVELSCOUNT = 3;
+const LEVELS_COUNT = 3;
 
 export function generateGameData() {
   const data = [];
 
-  for (let i = 0; i <= LEVELSCOUNT; i++) {
-    data.push(gameData[getRandomRange(1, 3)]);
+  for (let i = 0; i < LEVELS_COUNT; i++) {
+    data.push(gameData[getRandomRange(0, 3)]);
   }
 
   return data;
 }
 
-export const initialGameState = {
+export const INITIAL_GAME_STATE = {
   livesCount: 3,
   time: 50,
   isWin: false,

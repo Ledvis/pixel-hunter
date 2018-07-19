@@ -3,7 +3,6 @@ import {
   getElementFromTemplate
 } from './util';
 import game from './game';
-import renderBackBtn from './btn-back';
 import footer from './footer-page';
 
 const html = getElementFromTemplate(`
@@ -43,7 +42,6 @@ form.addEventListener(`submit`, function(evt) {
   evt.preventDefault();
   if (!buttonSubmitForm.disabled) {
     renderScreen(game);
-    renderBackBtn(game);
   }
 });
 

@@ -4,7 +4,7 @@ import {
 import footer from './footer-page';
 import countScore from './count-score';
 
-export default function renderResults(state) {
+export default function createResults(state) {
   return getElementFromTemplate(`
     <header class="header">
       <div class="header__back"></div>

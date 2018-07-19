@@ -17,5 +17,5 @@ btnBackScreen.addEventListener(`click`, function() {
 });
 
 export default function renderBackBtn(container) {
-  container.querySelector(`.header__back`).insertAdjacentElement(`afterbegin`, html);
+  container.querySelector(`.header__back`).appendChild(html);
 }

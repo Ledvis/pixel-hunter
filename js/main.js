@@ -1,6 +1,4 @@
-import introScreen from './intro';
-import {
-  renderScreen
-} from './util';
+import App from './app';
 
-renderScreen(introScreen);
+const app = new App();
+app.showIntro();

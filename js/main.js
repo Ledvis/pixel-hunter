@@ -1,6 +1,3 @@
-import introScreen from './intro';
-import {
-  renderScreen
-} from './util';
+import App from './app';
 
-renderScreen(introScreen);
+App.init();

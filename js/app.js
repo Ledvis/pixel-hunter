@@ -1,30 +1,55 @@
-import IntroScreen from './presenter/intro-presenter';
+import introPresenter from './presenter/intro-presenter';
+import greetingPresenter from './presenter/greeting-presenter';
+import rulesPresenter from './presenter/rules-presenter';
 
 const ControllerId = {
   WELCOME: ``,
-  RULES: `rules`,
   GREETING: `greeting`,
+  RULES: `rules`,
   GAME: `game`,
   STATS: `stats`
 };
 
 const Route = {
-  [ControllerId.WELCOME]: ``
+  [ControllerId.WELCOME]: introPresenter,
+  [ControllerId.GREETING]: greetingPresenter,
+  [ControllerId.RULES]: rulesPresenter,
 };
 
 export default class App {
   static init() {
-    const changeHashHandler = () => {
+    const onHashChange = () => {
       const hashValue = location.hash.replace(`#`, ``);
       const [id, data] = hashValue.split(`:`);
-      this.changeHash(id, data);
+      this.changeController(id, data);
     };
+    onHashChange();
     window.addEventListener(`hashchange`, () => {
-      changeHashHandler();
+      onHashChange();
     });
-    changeHashHandler();
   }
-  static changeHash(id, data) {
-    const controler = Route[id];
+
+  static changeController(id, data) {
+    const controller = Route[id];
+
+    if (controller) {
+      controller.init(data);
+    }
+  }
+
+  static showWelcomePage() {
+    location.hash = ControllerId.WELCOME;
+  }
+
+  static showGreetingPage() {
+    location.hash = ControllerId.GREETING;
+  }
+
+  static showRulesPage() {
+    location.hash = ControllerId.RULES;
+  }
+
+  static showGamePage(userName) {
+    location.hash = `${ControllerId.RULES}:${userName}`;
   }
 }

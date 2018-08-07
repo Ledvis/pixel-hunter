@@ -20,6 +20,6 @@ export default class IntroView extends AbstractView {
   }
 
   showNextPage() {
-
+    throw new Error(`this method should be redefined in presenter`);
   }
 }

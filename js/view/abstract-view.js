@@ -1,24 +1,26 @@
-import getElementFromTemplate from '../util';
+import {
+  getElementFromTemplate
+} from '../util';
 
 export default class AbstractView {
   get template() {
     throw new Error(`get template must be define for view`);
   }
 
-  render() {
+  createElement() {
     return getElementFromTemplate(this.template);
   }
 
   bind() {
-    // Define bind if needed
+    // Redefine bind if needed
   }
 
   getMarkup() {
-    this._element = this.render();
+    this._element = this.createElement();
     this.bind();
   }
 
-  getElement() {
+  get element() {
     if (!this._element) {
       this.getMarkup();
     }

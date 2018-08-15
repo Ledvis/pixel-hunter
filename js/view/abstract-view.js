@@ -1,6 +1,4 @@
-import {
-  getElementFromTemplate
-} from '../util';
+import getElementFromTemplate from '../util/get-template';
 
 export default class AbstractView {
   get template() {
@@ -12,7 +10,7 @@ export default class AbstractView {
   }
 
   bind() {
-    // Redefine bind if needed
+    // Redefine if needed
   }
 
   getMarkup() {

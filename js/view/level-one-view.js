@@ -1,6 +1,9 @@
+import {
+  resizeImages
+} from '../util/game-utility';
 import AbstractView from './abstract-view';
 
-export default class GameOneView extends AbstractView {
+export default class LevelWithOneImage extends AbstractView {
   constructor(levelData) {
     super();
     this._level = levelData;
@@ -28,6 +31,12 @@ export default class GameOneView extends AbstractView {
   }
 
   bind() {
+    const frameSize = {
+      width: 705,
+      height: 455
+    };
+    resizeImages(this._element, frameSize);
+
     const radioButtons = this._element.querySelectorAll(`input[type="radio"]`);
 
     radioButtons.forEach((button) => {

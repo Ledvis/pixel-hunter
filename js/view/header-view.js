@@ -2,8 +2,8 @@
 
 import AbstractView from './abstract-view';
 import {
-  GameSetting
-} from '../config';
+  GAME_SETTING
+} from '../util/config';
 
 export default class HeaderView extends AbstractView {
   constructor(mode, gameData) {
@@ -36,21 +36,21 @@ export default class HeaderView extends AbstractView {
   get gameHeader() {
     return `
       <header class="header">
-      <div class="header__back">
-        <button class="back">
-          <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-          <img src="img/logo_small.svg" width="101" height="44">
-        </button>
-      </div>
-      <h1 class="game__timer">${this._data.time}</h1>
-      <div class="game__lives">
-        ${new Array(GameSetting.MAX_LIVES_AMOUNT - this._data.lives)
-          .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
-          .join(``)}
-        ${new Array(this._data.lives)
-          .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`)
-          .join(``)}
-      </div>
+        <div class="header__back">
+          <button class="back">
+            <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
+            <img src="img/logo_small.svg" width="101" height="44">
+          </button>
+        </div>
+        <h1 class="game__timer">${this._data.time}</h1>
+        <div class="game__lives">
+          ${new Array(GAME_SETTING.MAX_LIVES_AMOUNT - this._data.lives)
+            .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
+            .join(``)}
+          ${new Array(this._data.lives)
+            .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`)
+            .join(``)}
+        </div>
       </header>
     `;
   }
@@ -59,20 +59,20 @@ export default class HeaderView extends AbstractView {
     this._element.querySelector(`.back`).addEventListener(`click`, (event) => {
       event.preventDefault();
 
-      if (!this._element.querySelector(`.timer`) || confirm(`Вы уверены? Ваша игра не будет сохранена.`)) {
-        switch (this._mode) {
-          case `game`:
+      switch (this._mode) {
+        case `game`:
+          if (!this._element.querySelector(`.timer`) || confirm(`Вы уверены? Ваша игра не будет сохранена.`)) {
             this.showRulesPage();
-            break;
+          }
+          break;
 
-          case `greeting`:
-            this.showWelcomePage();
-            break;
+        case `greeting`:
+          this.showWelcomePage();
+          break;
 
-          case `rules`:
-            this.showGreetingPage();
-            break;
-        }
+        case `rules`:
+          this.showGreetingPage();
+          break;
       }
     });
   }

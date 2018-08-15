@@ -1,4 +1,4 @@
-export function getElementFromTemplate(template) {
+export default function getElementFromTemplate(template) {
   const container = document.createElement(`div`);
   container.innerHTML = template.trim();
   return container;

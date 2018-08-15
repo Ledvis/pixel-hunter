@@ -1,6 +1,6 @@
 import RulesView from '../view/rules-view';
 import initHeader from './header-presenter';
-import renderScreen from '../render-screen';
+import renderTemplate from '../util/render-template';
 import App from '../app';
 
 class RulesPresenter {
@@ -8,7 +8,7 @@ class RulesPresenter {
     this._screen = new RulesView();
     this.bind();
 
-    return renderScreen(this._screen.element, initHeader(`rules`, null).init());
+    return renderTemplate(this._screen.element, initHeader(`rules`, null).init());
   }
 
   bind() {

@@ -1,6 +1,7 @@
 import introPresenter from './presenter/intro-presenter';
 import greetingPresenter from './presenter/greeting-presenter';
 import rulesPresenter from './presenter/rules-presenter';
+import gamePresenter from './presenter/game-presenter';
 
 const ControllerId = {
   WELCOME: ``,
@@ -14,6 +15,7 @@ const Route = {
   [ControllerId.WELCOME]: introPresenter,
   [ControllerId.GREETING]: greetingPresenter,
   [ControllerId.RULES]: rulesPresenter,
+  [ControllerId.GAME]: gamePresenter,
 };
 
 export default class App {
@@ -50,6 +52,6 @@ export default class App {
   }
 
   static showGamePage(userName) {
-    location.hash = `${ControllerId.RULES}:${userName}`;
+    location.hash = `${ControllerId.GAME}:${userName}`;
   }
 }

@@ -1,13 +1,13 @@
 import IntroView from '../view/intro-view';
 import App from '../app';
-import renderScreen from '../render-screen';
+import renderTemplate from '../util/render-template';
 
 class IntroPresenter {
   init() {
     this._screen = new IntroView();
     this.bind();
 
-    return renderScreen(this._screen.element);
+    return renderTemplate(this._screen.element);
   }
 
   bind() {

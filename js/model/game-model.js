@@ -3,10 +3,12 @@ import {
 } from '../util/backend';
 import {
   tick,
-  nextLevel
+  nextLevel,
+  subtractLive
 } from '../util/game-utility';
 import {
-  InitialGameState
+  InitialGameState,
+  GAME_SETTING
 } from '../util/config';
 
 export default class GameModel {
@@ -43,5 +45,13 @@ export default class GameModel {
 
   nextLevel() {
     this.updateState(nextLevel(this._state));
+  }
+
+  subtractLive() {
+    this.updateState(subtractLive(this._state));
+  }
+
+  isUserInGame() {
+    return this._state.lives !== -1 && this._state.level < GAME_SETTING.GAME_LEVELS_AMOUNT;
   }
 }

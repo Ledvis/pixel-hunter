@@ -48,7 +48,7 @@ export function resizeImages(element) {
   });
 }
 
-function copy(object) {
+function copyObject(object) {
   const newObject = Object.assign({}, object);
 
   for (const key in newObject) {
@@ -61,13 +61,19 @@ function copy(object) {
 }
 
 export function tick(game) {
-  const gameStat = copy(game);
+  const gameStat = copyObject(game);
   gameStat.time = gameStat.time - 1;
   return gameStat;
 }
 
 export function nextLevel(gameData) {
-  const game = copy(gameData);
+  const game = copyObject(gameData);
   game.level++;
+  return game;
+}
+
+export function subtractLive(gameData) {
+  const game = copyObject(gameData);
+  game.lives--;
   return game;
 }

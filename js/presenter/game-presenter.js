@@ -7,7 +7,8 @@ import renderTemplate from '../util/render-template';
 import {
   InitialGameState,
   TIME,
-  ANSWER
+  ANSWER,
+  PROJECT_ID
 } from '../util/config';
 
 const GameTemplate = {
@@ -40,7 +41,7 @@ class GamePresenter {
 
   generateView(levelData) {
     this.view = new GameTemplate[levelData.type](levelData);
-    this.view.showNextPage = function(isAnswerCorrect) {
+    this.view.showNextPage = (isAnswerCorrect) => {
       this.onChosenAnswer(isAnswerCorrect);
     };
     this.showLevel();
@@ -82,7 +83,24 @@ class GamePresenter {
     if (isAnswerCorrect) {
       this.model.nextLevel();
 
+      let answerType = ANSWER.RIGHT;
 
+      if (spendAnswerTime < TIME.FAST_ANSWER_MAX) {
+        answerType = ANSWER.FAST;
+      } else if (spendAnswerTime > TIME.SLOW_ANSWER_MIN) {
+        answerType = ANSWER.SLOW;
+      }
+    } else {
+      this.model.nextLevel();
+      this.model.subtractLive();
+    }
+
+    this._state = this.model._state;
+
+    if (this.model.isUserInGame()) {
+      this.init(this._state.userName, this._state);
+    } else {
+      this.gameOver();
     }
   }
 
@@ -95,6 +113,13 @@ class GamePresenter {
     }
 
     return null;
+  }
+
+  gameOver() {
+    const body = {
+      project: PROJECT_ID,
+      stats: this._state.stats
+    };
   }
 }
 

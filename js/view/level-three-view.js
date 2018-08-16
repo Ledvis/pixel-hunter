@@ -40,10 +40,12 @@ export default class LevelWithThreeImages extends AbstractView {
     pictures.forEach((pic) => {
       pic.addEventListener(`click`, (ev) => {
         const isCorrectAnswer = ev.target.lastElementChild.alt === this._level.typeAnswer;
-        this.showNextLevel(isCorrectAnswer);
+        this.showNextPage(isCorrectAnswer);
       });
     });
   }
 
-  showNextLevel() {}
+  showNextPage() {
+    throw new Error(`this method should be redefined in presenter`);
+  }
 }

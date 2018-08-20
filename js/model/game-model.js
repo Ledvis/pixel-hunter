@@ -2,9 +2,10 @@ import {
   loadData
 } from '../util/backend';
 import {
-  tick,
-  nextLevel,
-  subtractLive
+  executeTimer,
+  incrementLevel,
+  subtractLive,
+  setNewLevelStat
 } from '../util/game-utility';
 import {
   InitialGameState,
@@ -12,17 +13,17 @@ import {
 } from '../util/config';
 
 export default class GameModel {
-  constructor(state) {
-    this._state = state;
+  constructor(initialState) {
+    this.state = initialState;
   }
 
   updateState(newState) {
-    this._state = newState;
-    return this._state;
+    this.state = newState;
+    return this.state;
   }
 
   getQuestionsData() {
-    return this.questions && this.questions[this._state.level];
+    return this.questions && this.questions[this.state.level];
   }
 
   loadQuestionsData() {
@@ -34,24 +35,28 @@ export default class GameModel {
     return this.questions;
   }
 
-  tick(time) {
-    return this.updateState(tick(this._state, time));
+  tick() {
+    return this.updateState(executeTimer(this.state));
   }
 
-  stopTimer() {
-    this._state.time = InitialGameState.time;
-    this.updateState(this._state);
+  stop() {
+    this.state.time = InitialGameState.time;
+    this.updateState(this.state);
   }
 
   nextLevel() {
-    this.updateState(nextLevel(this._state));
+    this.updateState(incrementLevel(this.state));
   }
 
   subtractLive() {
-    this.updateState(subtractLive(this._state));
+    this.updateState(subtractLive(this.state));
   }
 
   isUserInGame() {
-    return this._state.lives !== -1 && this._state.level < GAME_SETTING.GAME_LEVELS_AMOUNT;
+    return this.state.lives !== -1 && this.state.level < GAME_SETTING.GAME_LEVELS_AMOUNT;
+  }
+
+  setLevelStat(answer) {
+    this.updateState(setNewLevelStat(this.state, answer));
   }
 }

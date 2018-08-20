@@ -61,7 +61,7 @@ export default class HeaderView extends AbstractView {
 
       switch (this._mode) {
         case `game`:
-          if (!this._element.querySelector(`.timer`) || confirm(`Вы уверены? Ваша игра не будет сохранена.`)) {
+          if (confirm(`Вы уверены? Ваша игра не будет сохранена.`)) {
             this.showRulesPage();
           }
           break;

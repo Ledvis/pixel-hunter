@@ -42,17 +42,20 @@ class GamePresenter {
   generateView(levelData) {
     this.view = new GameTemplate[levelData.type](levelData);
     this.view.showNextPage = (isAnswerCorrect) => {
-      this.onChosenAnswer(isAnswerCorrect);
+      this.onAnswer(isAnswerCorrect);
     };
     this.showLevel();
   }
 
   showLevel() {
     const template = this.view.element;
-    const gameHeader = createHeader(`game`, this._state).init();
-    const screen = renderTemplate(template, gameHeader);
-    this.headerContainer = screen.querySelector(`header`);
-    this.tick();
+    const levelHeader = createHeader(`game`, this._state).init();
+    const levelScreen = renderTemplate(template, levelHeader);
+    this.headerContainer = levelScreen.querySelector(`header`);
+    if (this.timer) {
+      this.deleteTimer();
+    }
+    this.initTimer();
   }
 
   updateHeader(state) {
@@ -69,46 +72,53 @@ class GamePresenter {
     }
   }
 
-  tick() {
+  initTimer() {
     this._state = this.model.tick();
     this.updateHeader(this._state);
-    this.timer = setTimeout(() => this.tick(), 1000);
+    this.timer = setTimeout(() => this.initTimer(), 1000);
     if (!this._state.time) {
-      this.onChosenAnswer(false);
+      this.onAnswer(false);
     }
   }
 
-  onChosenAnswer(isAnswerCorrect) {
+  onAnswer(isAnswerCorrect) {
     const spendAnswerTime = TIME.FOR_ANSWER - this.stopTimer();
     if (isAnswerCorrect) {
       this.model.nextLevel();
 
-      let answerType = ANSWER.RIGHT;
+      let answerType = ANSWER.CORRECT;
 
       if (spendAnswerTime < TIME.FAST_ANSWER_MAX) {
         answerType = ANSWER.FAST;
       } else if (spendAnswerTime > TIME.SLOW_ANSWER_MIN) {
         answerType = ANSWER.SLOW;
       }
+
+      this.model.setLevelStat(answerType);
     } else {
       this.model.nextLevel();
       this.model.subtractLive();
+      this.model.setLevelStat(ANSWER.WRONG);
     }
 
-    this._state = this.model._state;
+    this._state = this.model.state;
 
     if (this.model.isUserInGame()) {
-      this.init(this._state.userName, this._state);
+      this.init(this.model.userName, this._state);
     } else {
       this.gameOver();
     }
   }
 
+  deleteTimer() {
+    clearTimeout(this.timer);
+  }
+
   stopTimer() {
     if (this.timer) {
       const time = this._state.time;
-      this.model.stopTimer();
-      clearTimeout(this.timer);
+      this.model.stop();
+      this.deleteTimer(this.timer);
       return time;
     }
 

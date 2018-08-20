@@ -60,20 +60,26 @@ function copyObject(object) {
   return newObject;
 }
 
-export function tick(game) {
-  const gameStat = copyObject(game);
-  gameStat.time = gameStat.time - 1;
-  return gameStat;
+export function executeTimer(game) {
+  const state = copyObject(game);
+  state.time = state.time - 1;
+  return state;
 }
 
-export function nextLevel(gameData) {
-  const game = copyObject(gameData);
-  game.level++;
-  return game;
+export function incrementLevel(gameData) {
+  const state = copyObject(gameData);
+  state.level++;
+  return state;
 }
 
 export function subtractLive(gameData) {
-  const game = copyObject(gameData);
-  game.lives--;
-  return game;
+  const state = copyObject(gameData);
+  state.lives--;
+  return state;
+}
+
+export function setNewLevelStat(gameData, answer) {
+  const state = copyObject(gameData);
+  state.stats.push(answer);
+  return state;
 }

@@ -19,10 +19,17 @@ export const TIME = {
 };
 
 export const ANSWER = {
-  RIGHT: 1,
+  CORRECT: 1,
   FAST: 2,
   SLOW: 3,
   WRONG: 0
+};
+
+export const ANSWER_SCORE = {
+  CORRECT: 100,
+  FAST: 50,
+  SLOW: -50,
+  LIVE: 50
 };
 
 export const PROJECT_ID = 843130;

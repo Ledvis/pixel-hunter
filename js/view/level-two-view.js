@@ -37,14 +37,15 @@ export default class LevelWithTwoImages extends AbstractView {
     };
     resizeImages(this._element, frameSize);
 
-    const radioBtns = this._element.querySelectorAll(`input[type="radion"]`);
+    const radioBtns = this._element.querySelectorAll(`input[type="radio"]`);
 
-    let firstQuestion;
-    let secondQuestion;
 
-    function checkAnswers(first, second) {
+    const checkAnswers = (first, second) => {
       return this._level.answers[0].type === first && this._level.answers[1].type === second;
-    }
+    };
+
+    let firstQuestion = false;
+    let secondQuestion = false;
 
     radioBtns.forEach((btn) => {
       btn.addEventListener(`change`, (event) => {
@@ -53,12 +54,11 @@ export default class LevelWithTwoImages extends AbstractView {
         } else {
           secondQuestion = event.target.value;
         }
+        if (firstQuestion && secondQuestion) {
+          const isAnswerCorrect = checkAnswers(firstQuestion, secondQuestion);
+          this.showNextPage(isAnswerCorrect);
+        }
       });
-
-      if (firstQuestion && secondQuestion) {
-        const isAnswerCorrect = checkAnswers(firstQuestion, secondQuestion);
-        this.showNextPage(isAnswerCorrect);
-      }
     });
   }
 

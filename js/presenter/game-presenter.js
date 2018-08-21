@@ -44,10 +44,10 @@ class GamePresenter {
     this.view.showNextPage = (isAnswerCorrect) => {
       this.onAnswer(isAnswerCorrect);
     };
-    this.showLevel();
+    this.showNextLevel();
   }
 
-  showLevel() {
+  showNextLevel() {
     const template = this.view.element;
     const levelHeader = createHeader(`game`, this._state).init();
     const levelScreen = renderTemplate(template, levelHeader);

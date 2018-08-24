@@ -3,11 +3,12 @@ import LevelWithOneImage from '../view/level-one-view';
 import LevelWithTwoImages from '../view/level-two-view';
 import LevelWithThreeImages from '../view/level-three-view';
 import createHeader from './header-presenter';
+import createUserStat from './user-stat-presenter';
 import renderTemplate from '../util/render-template';
 import {
   InitialGameState,
   TIME,
-  ANSWER,
+  ANSWER_TYPE,
   PROJECT_ID
 } from '../util/config';
 
@@ -51,6 +52,7 @@ class GamePresenter {
     const template = this.view.element;
     const levelHeader = createHeader(`game`, this._state).init();
     const levelScreen = renderTemplate(template, levelHeader);
+    template.querySelector(`.game`).appendChild(createUserStat(this._state.stats).element);
     this.headerContainer = levelScreen.querySelector(`header`);
     if (this.timer) {
       this.deleteTimer();
@@ -86,19 +88,19 @@ class GamePresenter {
     if (isAnswerCorrect) {
       this.model.nextLevel();
 
-      let answerType = ANSWER.CORRECT;
+      let answerType = ANSWER_TYPE.CORRECT;
 
       if (spendAnswerTime < TIME.FAST_ANSWER_MAX) {
-        answerType = ANSWER.FAST;
+        answerType = ANSWER_TYPE.FAST;
       } else if (spendAnswerTime > TIME.SLOW_ANSWER_MIN) {
-        answerType = ANSWER.SLOW;
+        answerType = ANSWER_TYPE.SLOW;
       }
 
       this.model.setLevelStat(answerType);
     } else {
       this.model.nextLevel();
       this.model.subtractLive();
-      this.model.setLevelStat(ANSWER.WRONG);
+      this.model.setLevelStat(ANSWER_TYPE.WRONG);
     }
 
     this._state = this.model.state;

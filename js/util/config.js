@@ -1,6 +1,6 @@
 export const GAME_SETTING = {
   FAIL: -1,
-  GAME_LEVELS_AMOUNT: 3,
+  GAME_LEVELS_AMOUNT: 5,
   MAX_LIVES_AMOUNT: 3
 };
 
@@ -18,7 +18,7 @@ export const TIME = {
   LAST_SECONDS: 5
 };
 
-export const ANSWER = {
+export const ANSWER_TYPE = {
   CORRECT: 1,
   FAST: 2,
   SLOW: 3,

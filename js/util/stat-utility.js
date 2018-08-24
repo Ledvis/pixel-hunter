@@ -1,6 +1,6 @@
 import {
   GAME_SETTING,
-  ANSWER,
+  ANSWER_TYPE,
   ANSWER_SCORE
 } from '../util/config';
 
@@ -10,11 +10,11 @@ export function countFinalScore(answers, lives) {
   } else {
     const finallyScores = answers.reduce((sum, answer) => {
       switch (answer) {
-        case ANSWER.CORRECT:
+        case ANSWER_TYPE.CORRECT:
           return sum + ANSWER_SCORE.CORRECT;
-        case ANSWER.FAST:
+        case ANSWER_TYPE.FAST:
           return sum + ANSWER_SCORE.CORRECT + ANSWER_SCORE.FAST;
-        case ANSWER.SLOW:
+        case ANSWER_TYPE.SLOW:
           return sum + ANSWER_SCORE.CORRECT + ANSWER_SCORE.SLOW;
       }
 

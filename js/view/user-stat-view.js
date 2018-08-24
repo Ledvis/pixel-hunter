@@ -1,7 +1,7 @@
 import AbstractView from './abstract-view';
 import {
   GAME_SETTING,
-  ANSWER
+  ANSWER_TYPE
 } from '../util/config';
 
 export default class UserStatView extends AbstractView {
@@ -21,13 +21,13 @@ export default class UserStatView extends AbstractView {
 
   getLevelResults(answerType) {
     switch (answerType) {
-      case ANSWER.CORRECT:
+      case ANSWER_TYPE.CORRECT:
         return `<li class="stats__result stats__result--correct"></li>`;
-      case ANSWER.FAST:
+      case ANSWER_TYPE.FAST:
         return `<li class="stats__result stats__result--fast"></li>`;
-      case ANSWER.SLOW:
+      case ANSWER_TYPE.SLOW:
         return `<li class="stats__result stats__result--slow"></li>`;
-      case ANSWER.WRONG:
+      case ANSWER_TYPE.WRONG:
         return `<li class="stats__result stats__result--wrong"></li>`;
       default:
         return ``;

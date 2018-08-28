@@ -1,9 +1,11 @@
 import AbstractView from './abstract-view';
+import App from '../app';
 
 export default class GreetingView extends AbstractView {
   get template() {
     return `
-        <div class="greeting central--blur">
+      ${this.getHeader()}
+      <div class="greeting central--blur">
         <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
         <h1 class="greeting__asterisk">*</h1>
         <div class="greeting__challenge">
@@ -16,17 +18,11 @@ export default class GreetingView extends AbstractView {
         </div>
         <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
       </div>
-      `;
+      ${this.footerTemplate}
+    `;
   }
 
   bind() {
-    this._element.querySelector(`.greeting__continue`).addEventListener(`click`, (event) => {
-      event.preventDefault();
-      this.showNextPage();
-    });
-  }
 
-  showNextPage() {
-    throw new Error(`this method should be redefined in presenter`);
   }
 }

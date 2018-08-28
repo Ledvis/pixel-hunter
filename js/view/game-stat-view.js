@@ -1,6 +1,6 @@
 import AbstractView from './abstract-view';
 import {
-  GAME_SETTING
+  GAME_SETTING,
 } from '../util/config';
 import {
   countFinalScore
@@ -13,10 +13,10 @@ export default class GameStatView extends AbstractView {
     this._finalScore = [];
 
     this._gameData.forEach((game) => {
-      const stats = game.stats;
-      game.lives = GAME_SETTING.MAX_AMOUNT_LIVES - stats.filter((value) => value === 0).length;
-      const finalScore = countFinalScore(stats, game.lives);
-      this._finalScores.push(finalScore);
+      const userAnswers = game.stats;
+      game.lives = GAME_SETTING.MAX_LIVES_AMOUNT - userAnswers.filter((value) => value === 0).length;
+      const finalScore = countFinalScore(userAnswers, game.lives);
+      this._finalScore.push(finalScore);
     });
   }
 }

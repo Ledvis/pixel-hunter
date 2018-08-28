@@ -1,5 +1,6 @@
 import {
-  loadData
+  loadData,
+  postData
 } from '../util/backend';
 import {
   executeTimer,
@@ -28,6 +29,10 @@ export default class GameModel {
 
   loadQuestionsData() {
     return loadData(`questions`);
+  }
+
+  sendAnswersData(uri, body, callback) {
+    postData(uri, body, callback);
   }
 
   updateQuestionsList(levels) {

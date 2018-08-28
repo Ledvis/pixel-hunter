@@ -11,6 +11,10 @@ import {
   ANSWER_TYPE,
   PROJECT_ID
 } from '../util/config';
+import App from '../app';
+import {
+  postData
+} from '../util/backend';
 
 const GameTemplate = {
   "tinder-like": LevelWithOneImage,
@@ -132,6 +136,8 @@ class GamePresenter {
       project: PROJECT_ID,
       stats: this._state.stats
     };
+
+    postData(`stats/${this.model.userName}`, body, () => App.showGameStats(this.model.userName));
   }
 }
 

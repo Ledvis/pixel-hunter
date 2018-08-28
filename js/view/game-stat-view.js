@@ -6,7 +6,7 @@ import {
   countFinalScore
 } from '../util/stat-utility';
 
-export default class StatView extends AbstractView {
+export default class GameStatView extends AbstractView {
   constructor(userStats) {
     super();
     this._gameData = userStats.reverse();

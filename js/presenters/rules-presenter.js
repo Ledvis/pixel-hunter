@@ -1,20 +1,20 @@
-import GreetingView from '../views/greeting-view';
+import RulesView from '../views/rules-view';
 import App from '../app';
 
-export default new class GreetingPresenter {
+export default new class RulesPresenter {
   init() {
-    this.view = new GreetingView();
+    this.view = new RulesView();
     this.view.renderPage();
     this.bind();
   }
 
   bind() {
     this.view.showPreviousPage = function() {
-      App.showWelcomePage();
+      App.showGreetingPage();
     };
 
     this.view.showNextPage = function() {
-      App.showRulesPage();
+      alert(`fuck you`);
     };
   }
 }();

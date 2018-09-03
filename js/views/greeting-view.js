@@ -1,10 +1,9 @@
 import AbstractView from './abstract-view';
-import App from '../app';
 
 export default class GreetingView extends AbstractView {
   get template() {
     return `
-      ${this.getHeader()}
+      ${this.createHeader(`default`)}
       <div class="greeting central--blur">
         <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
         <h1 class="greeting__asterisk">*</h1>
@@ -23,6 +22,19 @@ export default class GreetingView extends AbstractView {
   }
 
   bind() {
+    this._element.querySelector(`.header__back`).addEventListener(`click`, () => {
+      this.showPreviousPage();
+    });
+    this._element.querySelector(`.greeting__continue`).addEventListener(`click`, () => {
+      this.showNextPage();
+    });
+  }
 
+  showPreviousPage() {
+    throw new Error(`Define this method in presenter`);
+  }
+
+  showNextPage() {
+    throw new Error(`Define this method in presenter`);
   }
 }

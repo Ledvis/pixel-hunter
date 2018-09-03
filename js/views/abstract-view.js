@@ -3,17 +3,29 @@ export default class AbstractView {
     throw new Error(`get template must be define for view`);
   }
 
-  get headerTemplate() {
+  createHeader(mode) {
+    if (mode === `game`) {
+      return `
+        <header class="header">
+          <div class="header__back">
+            <button class="back">
+              <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
+              <img src="img/logo_small.svg" width="101" height="44">
+            </button>
+          </div>
+        </header>
+      `;
+    }
     return `
-      <header class="header">
-        <div class="header__back">
-          <button class="back">
-            <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-            <img src="img/logo_small.svg" width="101" height="44">
-          </button>
-        </div>
-      </header>
-    `;
+    <header class="header">
+      <div class="header__back">
+        <button class="back">
+          <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
+          <img src="img/logo_small.svg" width="101" height="44">
+        </button>
+      </div>
+    </header>
+  `;
   }
 
   get footerTemplate() {
@@ -31,7 +43,18 @@ export default class AbstractView {
     `;
   }
 
-  get content() {
+  createElement() {
+    const container = document.createElement(`div`);
+    container.innerHTML = this.template.trim();
+    return container;
+  }
+
+  getMarkup() {
+    this._element = this.createElement();
+    this.bind();
+  }
+
+  get element() {
     if (!this._element) {
       this.getMarkup();
     }
@@ -42,21 +65,6 @@ export default class AbstractView {
   renderPage() {
     const centralElement = document.querySelector(`.central`);
     centralElement.innerHTML = ``;
-    centralElement.appendChild(this.content);
-  }
-
-  createHeader() {
-
-  }
-
-  createElement() {
-    const container = document.createElement(`div`);
-    container.innerHTML = this.template.trim();
-    return container;
-  }
-
-  getMarkup() {
-    this._element = this.createElement();
-    this.bind();
+    centralElement.appendChild(this.element);
   }
 }

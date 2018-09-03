@@ -1,5 +1,4 @@
 import AbstractView from './abstract-view';
-import App from '../app';
 
 export default class WelcomeView extends AbstractView {
   constructor() {
@@ -19,13 +18,13 @@ export default class WelcomeView extends AbstractView {
   }
 
   bind() {
-    const asteriskElement = this.content.querySelector(`.intro__asterisk`);
+    const asteriskElement = this.element.querySelector(`.intro__asterisk`);
     asteriskElement.addEventListener(`click`, () => {
       this.showNextPage();
     });
   }
 
   showNextPage() {
-    App.showGreetingPage();
+    throw new Error(`Define this method in presenter`);
   }
 }

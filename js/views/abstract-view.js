@@ -1,31 +1,31 @@
+import {
+  getElementFromTemplate
+} from '../lib/util';
+
 export default class AbstractView {
-  get template() {
-    throw new Error(`get template must be define for view`);
+  constructor(data = {}) {
+    this._data = data;
   }
 
-  createHeader(mode) {
-    if (mode === `game`) {
-      return `
-        <header class="header">
-          <div class="header__back">
-            <button class="back">
-              <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-              <img src="img/logo_small.svg" width="101" height="44">
-            </button>
-          </div>
-        </header>
-      `;
-    }
+  get template() {
+    throw new Error(`Abstract method. Define template for view`);
+  }
+
+  get headerTemplate() {
     return `
-    <header class="header">
-      <div class="header__back">
-        <button class="back">
-          <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-          <img src="img/logo_small.svg" width="101" height="44">
-        </button>
-      </div>
-    </header>
-  `;
+      <header class="header">
+        <div class="header__back">
+          <button class="back">
+            <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
+            <img src="img/logo_small.svg" width="101" height="44">
+          </button>
+        </div>
+      </header>
+    `;
+  }
+
+  createHeader() {
+    return getElementFromTemplate(this.headerTemplate);
   }
 
   get footerTemplate() {
@@ -43,15 +43,11 @@ export default class AbstractView {
     `;
   }
 
-  createElement() {
-    const container = document.createElement(`div`);
-    container.innerHTML = this.template.trim();
-    return container;
-  }
-
   getMarkup() {
-    this._element = this.createElement();
-    this.bind();
+    this._element = getElementFromTemplate(this.template);
+    if (typeof this.bind === `function`) {
+      this.bind();
+    }
   }
 
   get element() {
@@ -60,11 +56,5 @@ export default class AbstractView {
     }
 
     return this._element;
-  }
-
-  renderPage() {
-    const centralElement = document.querySelector(`.central`);
-    centralElement.innerHTML = ``;
-    centralElement.appendChild(this.element);
   }
 }

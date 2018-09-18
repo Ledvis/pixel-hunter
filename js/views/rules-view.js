@@ -3,7 +3,6 @@ import AbstractView from './abstract-view';
 export default class RulesView extends AbstractView {
   get template() {
     return `
-      ${this.createHeader(`default`)}
       <div class="rules">
         <h1 class="rules__title">Правила</h1>
         <p class="rules__description">Угадай 10 раз для каждого изображения фото <img src="img/photo_icon.png" width="16" height="16"> или рисунок <img src="img/paint_icon.png" width="16" height="16" alt="">.<br>
@@ -25,20 +24,16 @@ export default class RulesView extends AbstractView {
   bind() {
     const inputEl = this._element.querySelector(`.rules__input`);
     const buttonEl = this._element.querySelector(`.rules__button`);
-    let inputValue;
+    let userName;
 
     inputEl.addEventListener(`keyup`, () => {
-      inputValue = inputEl.value;
-      buttonEl.disabled = inputValue.length === 0;
+      userName = inputEl.value;
+      buttonEl.disabled = userName.length === 0;
     });
 
     buttonEl.addEventListener(`click`, (event) => {
       event.preventDefault();
-      this.showNextPage(inputValue);
-    });
-
-    this._element.querySelector(`.header__back`).addEventListener(`click`, () => {
-      this.showPreviousPage();
+      this.showNextPage(userName);
     });
   }
 
